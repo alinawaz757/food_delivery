@@ -15,6 +15,8 @@ import SubMenuContainer from "./components/SubMenuContainer";
 import { MenuItems, Items } from "./components/Data";
 import MenuCard from "./components/MenuCard";
 import ItemCard from "./components/ItemCard";
+import DebitCard from "./components/DebitCard";
+import CartItem from "./components/CartItem";
 
 function App() {
   const [isMainData, setIsMainData] = useState(
@@ -63,7 +65,7 @@ function App() {
           </div>
           <div className="dishContainer">
             <div className="menuCard">
-              <SubMenuContainer />
+              <SubMenuContainer name="Menu Category" />
             </div>
             <div className="rowContainer">
               {MenuItems &&
@@ -95,7 +97,31 @@ function App() {
             </div>
           </div>
         </div>
-        <div className="rightMenu"></div>
+        <div className="rightMenu">
+          <div className="debitCardContainer">
+            <div className="debitCard">
+              <DebitCard />
+            </div>
+          </div>
+          <div className="cartCheckoutContainer">
+            <SubMenuContainer name="Cart Items" />
+            <div className="cartItems">
+              <CartItem
+                imgSrc="https://firebasestorage.googleapis.com/v0/b/food-delivery-37c59.appspot.com/o/Images%2Fburger1.png?alt=media&token=319dfbe9-462b-46ea-8f38-6ca7a20319e0"
+                name="Burger Bristo"
+                quantity={4}
+                price={7.95}
+              />
+            </div>
+          </div>
+          <div className="totalSection">
+            <h3>Total</h3>
+            <p>
+              <span>$ </span>45.0
+            </p>
+          </div>
+          <button className="checkOut">Check Out</button>
+        </div>
       </main>
       {/* Bottom Menu */}
       <div className="bottomMenu">
