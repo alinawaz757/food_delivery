@@ -6,6 +6,10 @@ import {
 } from "@mui/icons-material";
 
 function Header() {
+  const openRightMenu = () => {
+    const rightMenu = document.querySelector(".rightMenu");
+    rightMenu.classList.toggle("active");
+  };
   return (
     <header>
       <img className="logo" src="/logo192.png" alt="" />
@@ -26,7 +30,7 @@ function Header() {
         </div>
       </div>
       <div className="toggleMenu">
-        <BarChart className="toggleIcon" />
+        <BarChart className="toggleIcon" onClick={openRightMenu} />
       </div>
     </header>
   );
