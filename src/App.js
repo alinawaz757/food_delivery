@@ -6,7 +6,7 @@ import {
   Settings,
   SummarizeRounded,
 } from "@mui/icons-material";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import BannerName from "./components/BannerName";
 import Header from "./components/Header";
@@ -14,8 +14,12 @@ import MenuContainer from "./components/MenuContainer";
 import SubMenuContainer from "./components/SubMenuContainer";
 import { MenuItems, Items } from "./components/Data";
 import MenuCard from "./components/MenuCard";
+import ItemCard from "./components/ItemCard";
 
 function App() {
+  const [isMainData, setIsMainData] = useState(
+    Items.filter((el) => el.itemId === "burger01")
+  );
   useEffect(() => {
     const menuLi = document.querySelectorAll("#menu li");
     menuLi[0].classList.add("active");
@@ -36,7 +40,12 @@ function App() {
     }
 
     menuCard.forEach((n) => n.addEventListener("click", setMenuCardActive));
-  }, []);
+  }, [isMainData]);
+
+  const handleCategoryClick = (category) => {
+    setIsMainData(Items.filter((el) => el.itemId === category));
+  };
+
   return (
     <div className="App">
       {/* Header */}
@@ -59,13 +68,29 @@ function App() {
             <div className="rowContainer">
               {MenuItems &&
                 MenuItems.map((data) => (
-                  <div key={data.id}>
+                  <div
+                    key={data.id}
+                    onClick={() => handleCategoryClick(data.itemId)}
+                  >
                     <MenuCard
                       imgSrc={data.imgSrc}
                       name={data.name}
                       isActive={data.id === 1 ? true : false}
                     />
                   </div>
+                ))}
+            </div>
+            <div className="dishItemContainer">
+              {isMainData &&
+                isMainData.map((data) => (
+                  <ItemCard
+                    key={data.id}
+                    name={data.name}
+                    price={data.price}
+                    ratings={data.ratings}
+                    imgSrc={data.imgSrc}
+                    itemId={data.id}
+                  />
                 ))}
             </div>
           </div>
